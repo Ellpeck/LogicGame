@@ -1,4 +1,4 @@
-package de.ellpeck.logicgame.renderer;
+package de.ellpeck.logicgame.render.engine;
 
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;

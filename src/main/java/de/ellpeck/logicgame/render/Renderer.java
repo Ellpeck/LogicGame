@@ -1,6 +1,10 @@
-package de.ellpeck.logicgame.renderer;
+package de.ellpeck.logicgame.render;
 
 import de.ellpeck.logicgame.Main;
+import de.ellpeck.logicgame.render.engine.IDisposable;
+import de.ellpeck.logicgame.render.engine.ShaderProgram;
+import de.ellpeck.logicgame.render.engine.Texture;
+import de.ellpeck.logicgame.render.engine.VertexBufferObject;
 import de.ellpeck.logicgame.util.Colors;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryUtil;

@@ -1,9 +1,9 @@
 package de.ellpeck.logicgame;
 
-import de.ellpeck.logicgame.renderer.AssetLoader;
-import de.ellpeck.logicgame.renderer.Renderer;
-import de.ellpeck.logicgame.renderer.ShaderProgram;
-import de.ellpeck.logicgame.renderer.Texture;
+import de.ellpeck.logicgame.level.Level;
+import de.ellpeck.logicgame.render.AssetLoader;
+import de.ellpeck.logicgame.render.Renderer;
+import de.ellpeck.logicgame.render.engine.ShaderProgram;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
@@ -28,7 +28,7 @@ public class Game{
     public Renderer renderer;
     public ShaderProgram program;
 
-    private Texture testTexture;
+    public Level currentLevel;
 
     public void init(){
         GLFW.glfwSetErrorCallback(this.callback);
@@ -74,14 +74,14 @@ public class Game{
             RockBottomAPI.logger().log(Level.WARNING, "Couldn't set game icon", e);
         }*/
 
+        GLFW.glfwShowWindow(this.windowId);
+        GLFW.glfwPollEvents();
+
         this.renderer = new Renderer();
 
         this.program = AssetLoader.loadShaderProgram("/shaders/default.vert", "/shaders/default.frag");
         this.program.setDefaultValues(this.width, this.height);
         this.renderer.setDefaultProgram(this.program);
-
-        GLFW.glfwShowWindow(this.windowId);
-        GLFW.glfwPollEvents();
 
         /*try{
             ITexture tex = new Texture(AssetManager.getResourceAsStream("/assets/rockbottom/tex/intro/loading.png"));
@@ -99,7 +99,9 @@ public class Game{
             }
         });
 
-        this.testTexture = AssetLoader.loadTexture("/textures/test.png");
+        Registry.init();
+
+        this.currentLevel = Level.parse(AssetLoader.loadJson("/levels/level_1.json"));
     }
 
     public void updateTickless(){
@@ -111,7 +113,9 @@ public class Game{
 
             this.renderer.begin();
 
-            this.testTexture.draw(0, 0, 1F);
+            if(this.currentLevel != null){
+                this.currentLevel.renderer.render();
+            }
 
             this.renderer.end();
 
@@ -121,7 +125,9 @@ public class Game{
     }
 
     public void updateTicked(){
-
+        if(this.currentLevel != null){
+            this.currentLevel.update();
+        }
     }
 
     protected void getWindowSize(){

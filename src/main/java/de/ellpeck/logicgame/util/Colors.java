@@ -21,6 +21,7 @@ public final class Colors{
     public static final int PINK = 0xFFFF006E;
     public static final int MAGENTA = 0xFFFF00DC;
     public static final int GREEN = 0xFF267F00;
+    public static final int BLUE = 0xFF1047A0;
 
     public static int rgb(int r, int g, int b){
         return rgb(r, g, b, 255);

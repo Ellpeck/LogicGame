@@ -1,4 +1,4 @@
-package de.ellpeck.logicgame.renderer;
+package de.ellpeck.logicgame.render.engine;
 
 import org.lwjgl.opengl.GL15;
 
@@ -56,6 +56,7 @@ public class VertexBufferObject implements IDisposable{
         return this.isStatic;
     }
 
+    @Override
     public void dispose(){
         this.unbind();
         GL15.glDeleteBuffers(this.id);

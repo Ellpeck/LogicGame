@@ -1,6 +1,12 @@
-package de.ellpeck.logicgame.renderer;
+package de.ellpeck.logicgame.render;
 
 import com.google.common.base.Charsets;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import de.ellpeck.logicgame.render.engine.IDisposable;
+import de.ellpeck.logicgame.render.engine.Shader;
+import de.ellpeck.logicgame.render.engine.ShaderProgram;
+import de.ellpeck.logicgame.render.engine.Texture;
 import org.lwjgl.opengl.GL20;
 
 import java.io.BufferedReader;
@@ -34,6 +40,14 @@ public final class AssetLoader{
         }
         catch(Exception e){
             throw new RuntimeException("Couldn't load texture at "+path, e);
+        }
+    }
+
+    public static JsonElement loadJson(String path){
+        try{
+            return new JsonParser().parse(new InputStreamReader(getResource(path)));
+        }catch(Exception e){
+            throw new RuntimeException("Couldn't load json at "+path, e);
         }
     }
 

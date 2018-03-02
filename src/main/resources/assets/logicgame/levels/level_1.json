@@ -1,0 +1,46 @@
+{
+    "name": "Level One",
+    "description": "A simple test! Just watch the cables turn on and off (hopefully) to test if the level and tile logic part even works fully!",
+    "layout": [
+        "    XXXXX ",
+        "XXXXX   X ",
+        "     XXXX ",
+        "XXX  X    ",
+        "  X  X    "
+    ],
+    "tiles": {
+        " ": "none",
+        "X": "blue_wire"
+    },
+    "inputs": {
+        "left": [2, 4],
+        "right": [5, 4]
+    },
+    "outputs": {
+        "top": [0, 1],
+        "bottom": [0, 3]
+    },
+    "stages": [
+        {
+            "inputs": {
+                "left": {
+                    "activate_time": 0
+                },
+                "right": {
+                    "activate_time": 10,
+                    "shutoff_time": 15,
+                    "repeat_time": 10
+                }
+            },
+            "outputs": {
+                "top": {
+                    "state_needed": true,
+                    "amount_needed": 10
+                },
+                "bottom": {
+                    "state_needed": true
+                }
+            }
+        }
+    ]
+}

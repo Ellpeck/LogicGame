@@ -1,4 +1,4 @@
-package de.ellpeck.logicgame.renderer;
+package de.ellpeck.logicgame.render.engine;
 
 public enum TextureBank{
     BANK_1,

@@ -1,0 +1,70 @@
+{
+    "name": "AND Gates",
+    "description": "Wire the inputs up in a way that will make the output wire turn on if, and only if both input wires are on.",
+    "layout": [
+        "          ",
+        "XX        ",
+        "        XX",
+        "XX        ",
+        "          "
+    ],
+    "tiles": {
+        " ": "none",
+        "X": "blue_wire"
+    },
+    "inputs": {
+        "top": [0, 1],
+        "bottom": [0, 3]
+    },
+    "outputs": {
+        "main": [9, 2]
+    },
+    "stages": [
+        {
+            "outputs": {
+                "main": {
+                    "state_needed": false
+                }
+            }
+        },
+        {
+            "inputs": {
+                "top": {
+                    "activate_time": 0
+                }
+            },
+            "outputs": {
+                "main": {
+                    "state_needed": false
+                }
+            }
+        },
+        {
+            "inputs": {
+                "bottom": {
+                    "activate_time": 0
+                }
+            },
+            "outputs": {
+                "main": {
+                    "state_needed": false
+                }
+            }
+        },
+        {
+            "inputs": {
+                "top": {
+                    "activate_time": 0
+                },
+                "bottom": {
+                    "activate_time": 0
+                }
+            },
+            "outputs": {
+                "main": {
+                    "state_needed": true
+                }
+            }
+        }
+    ]
+}

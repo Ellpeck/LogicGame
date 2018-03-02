@@ -1,5 +1,6 @@
-package de.ellpeck.logicgame.renderer;
+package de.ellpeck.logicgame.render.engine;
 
+import de.ellpeck.logicgame.render.Renderer;
 import de.ellpeck.logicgame.util.Colors;
 
 public class VertexProcessor{

@@ -1,4 +1,4 @@
-package de.ellpeck.logicgame.renderer;
+package de.ellpeck.logicgame.render.engine;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;

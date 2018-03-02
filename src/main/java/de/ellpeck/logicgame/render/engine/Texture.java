@@ -1,4 +1,4 @@
-package de.ellpeck.logicgame.renderer;
+package de.ellpeck.logicgame.render.engine;
 
 import com.google.common.io.ByteStreams;
 import de.ellpeck.logicgame.Main;
