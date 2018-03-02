@@ -1,0 +1,10 @@
+/.idea
+/out
+/META-INF
+/*.iml
+/*.ipr
+/*.iws
+/game
+/rockbottom
+/build
+/.gradle
