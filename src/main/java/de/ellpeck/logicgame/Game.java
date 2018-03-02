@@ -114,7 +114,7 @@ public class Game{
             this.renderer.begin();
 
             if(this.currentLevel != null){
-                this.currentLevel.renderer.render();
+                this.currentLevel.renderer.render(this);
             }
 
             this.renderer.end();
@@ -160,4 +160,11 @@ public class Game{
         this.callback.free();
     }
 
+    public int getWidth(){
+        return this.width;
+    }
+
+    public int getHeight(){
+        return this.height;
+    }
 }

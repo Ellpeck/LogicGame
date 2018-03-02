@@ -9,7 +9,6 @@
         "          "
     ],
     "tiles": {
-        " ": "none",
         "X": "blue_wire"
     },
     "inputs": {

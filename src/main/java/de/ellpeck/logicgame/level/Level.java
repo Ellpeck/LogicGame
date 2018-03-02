@@ -1,5 +1,7 @@
 package de.ellpeck.logicgame.level;
 
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -14,6 +16,7 @@ import java.util.Map;
 public class Level{
 
     private final LogicTile[][] tiles;
+    private final Table<Integer, Integer, IOInfo> ioInfos = HashBasedTable.create();
     public final String name;
     public final String description;
     public final int width;
@@ -30,15 +33,29 @@ public class Level{
     }
 
     public LogicTile getTile(int x, int y){
-        return this.tiles[x][y];
+        return this.isInBounds(x, y) ? this.tiles[x][y] : null;
     }
 
-    public void setTile(int x, int y, LogicTileConstructor constructor){
-        this.tiles[x][y] = constructor.makeTile(this, x, y);
+    public boolean setTile(int x, int y, LogicTileConstructor constructor){
+        if(this.isInBounds(x, y)){
+            this.tiles[x][y] = constructor.makeTile(this, x, y);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public boolean isInBounds(int x, int y){
+        return x >= 0 && y >= 0 && x < this.width && y < this.height;
     }
 
     public void update(){
 
+    }
+
+    public IOInfo getIOInfo(int x, int y){
+        return this.ioInfos.get(x, y);
     }
 
     public static Level parse(JsonElement element){
@@ -67,14 +84,32 @@ public class Level{
 
                 char[] chars = rowStrg.toCharArray();
                 for(int x = 0; x < chars.length; x++){
-                    level.setTile(x, y, tileMap.get(chars[x]));
+                    if(chars[x] != ' '){
+                        level.setTile(x, y, tileMap.get(chars[x]));
+                    }
                 }
             }
+
+            JsonObject inputs = object.get("inputs").getAsJsonObject();
+            parseIO(level, inputs, true);
+
+            JsonObject outputs = object.get("outputs").getAsJsonObject();
+            parseIO(level, outputs, false);
 
             return level;
         }
         catch(Exception e){
             throw new RuntimeException("Couldn't parse level with name "+name, e);
+        }
+    }
+
+    private static void parseIO(Level level, JsonObject object, boolean isInput){
+        for(Map.Entry<String, JsonElement> entry : object.entrySet()){
+            JsonArray pos = entry.getValue().getAsJsonArray();
+            int x = pos.get(0).getAsInt();
+            int y = pos.get(1).getAsInt();
+
+            level.ioInfos.put(x, y, new IOInfo(x, y, entry.getKey(), isInput));
         }
     }
 }
